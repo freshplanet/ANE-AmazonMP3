@@ -13,24 +13,25 @@ The ANE binary (AirAmazonMP3.ane) is located in the *bin* folder. You should add
 Usage
 -----
 
-	Only two interactions are supported at this time:
+	Only three interactions are supported at this time:
 	* show album detail
+	* show track detail
 	* search
 
-	If the Amazon MP3 is not installed, it is your responsibility to fallback on the Amazon web store.
+	If the Amazon MP3 application is not installed, the ANE will fallback on the Amazon mobile web store.
     
     ```actionscript
-    // Check if the Amazon MP3 app is installed
-    var hasAmazonMP3App:Boolean = AirAmazonMP3.getInstance().hasAmazonMP3App;
+    	// Set the user's country (used to pick the right Amazon mobile web store)
+    	AirAmazonMP3.getInstance().country = "fr"; // France
 
-    if (hasAmazonMP3App)
-    {
-    	// Show an album detail and autoplay a track
+    	// Show an album detail and highlight a track (autoplay on Amazon MP3 app)
     	AirAmazonMP3.getInstance().showAlbumDetail("SOME_ALBUM_ASIN", "SOME_TRACK_ASIN", "MY_REFERRER_NAME");
+
+    	// Show a track detail (mobile web store only)
+    	AirAmazonMP3.getInstance().showTrackDetail("SOME_TRACK_ASIN", "MY_REFERRER_NAME");
 
     	// Perform a search
     	AirAmazonMP3.getInstance().search("MY_SEARCH_STRING", "MY_REFERRER_NAME");
-    }
     ```
 
 

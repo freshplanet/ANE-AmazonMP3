@@ -36,6 +36,7 @@ public class ExtensionContext extends FREContext
 	public static final String TYPE_SEARCH = "com.amazon.mp3.type.SEARCH";
 	public static final String EXTRA_EXTERNAL_EVENT_TYPE = "com.amazon.mp3.extra.EXTERNAL_EVENT_TYPE";
 	public static final String EXTRA_ALBUM_ASIN = "com.amazon.mp3.extra.ALBUM_ASIN";
+	public static final String EXTRA_TRACK_ASIN = "com.amazon.mp3.extra.TRACK_ASIN";
 	public static final String EXTRA_AUTO_PLAY_TRACK_ASIN = "com.amazon.mp3.extra.AUTO_PLAY_TRACK_ASIN";
 	public static final String EXTRA_SEARCH_STRING = "com.amazon.mp3.extra.SEARCH_STRING";
 	public static final String EXTRA_SEARCH_TYPE = "com.amazon.mp3.extra.SEARCH_TYPE";

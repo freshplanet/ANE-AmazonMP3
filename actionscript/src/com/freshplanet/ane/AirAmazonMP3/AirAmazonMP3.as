@@ -21,6 +21,8 @@ package com.freshplanet.ane.AirAmazonMP3
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	import flash.system.Capabilities;
 
 	public class AirAmazonMP3 extends EventDispatcher
@@ -65,6 +67,8 @@ package com.freshplanet.ane.AirAmazonMP3
 		
 		public var logEnabled : Boolean = true;
 		
+		public var country : String = "us";
+		
 		public function get hasAmazonMP3App():Boolean
 		{
 			return isSupported ? _context.call("hasAmazonMP3App") as Boolean : false;
@@ -72,17 +76,44 @@ package com.freshplanet.ane.AirAmazonMP3
 		
 		public function showAlbumDetails(albumASIN:String, autoPlayTrackASIN:String = null, referrerName:String = null):void
 		{
-			if (isSupported && hasAmazonMP3App && albumASIN)
+			if (isSupported && albumASIN)
 			{
-				_context.call("showAlbumDetails", albumASIN, autoPlayTrackASIN, referrerName);
+				if (hasAmazonMP3App)
+				{
+					_context.call("showAlbumDetails", albumASIN, autoPlayTrackASIN, referrerName);
+				}
+				else
+				{
+					var path:String = "/gp/dmusic/device/mp3/store/album/"+albumASIN;
+					if (autoPlayTrackASIN) path += "/highlight:"+autoPlayTrackASIN;
+					openWebStore(path, referrerName);
+				}
+			}
+		}
+		
+		public function showTrackDetails(trackASIN:String, referrerName:String = null):void
+		{
+			if (isSupported && trackASIN)
+			{
+				// As of 2013-05-20 there is no intent to show a track detail on the Amazon MP3 application.
+				var path:String = "/gp/dmusic/device/mp3/store/track/"+trackASIN;
+				openWebStore(path, referrerName);
 			}
 		}
 
 		public function search(searchString:String, referrerName:String = null):void
 		{
-			if (isSupported && hasAmazonMP3App && searchString)
+			if (isSupported && searchString)
 			{
-				_context.call("search", searchString, referrerName);
+				if (hasAmazonMP3App)
+				{
+					_context.call("search", searchString, referrerName);
+				}
+				else
+				{
+					var path:String = "/gp/dmusic/device/mp3/store/artist#search/"+searchString;
+					openWebStore(path, referrerName);
+				}
 			}
 		}
 		
@@ -96,9 +127,35 @@ package com.freshplanet.ane.AirAmazonMP3
 		
 		private static const EXTENSION_ID : String = "com.freshplanet.AirAmazonMP3";
 		
+		private static var COUNTRY_TO_WEB_STORE : Object = {
+			"us": "https://www.amazon.com",
+			"gb": "https://www.amazon.co.uk",
+			"de": "https://www.amazon.de",
+			"fr": "https://www.amazon.fr",
+			"es": "https://www.amazon.es",
+			"it": "https://www.amazon.it",
+			"jp": "http://www.amazon.co.jp"
+		};
+		
 		private static var _instance : AirAmazonMP3;
 		
 		private var _context : ExtensionContext;
+		
+		private function openWebStore(path:String, referrerName:String):void
+		{
+			// Choose web store (default: us)
+			var storeDomain:String = country in COUNTRY_TO_WEB_STORE ? COUNTRY_TO_WEB_STORE[country] : COUNTRY_TO_WEB_STORE["us"];
+			
+			// Create tracking tags if referrer name is present
+			var trackingSuffix:String = "";
+			if (referrerName)
+			{
+				trackingSuffix = "?tag="+referrerName+"&utm_source="+referrerName+"1&utm_campaign="+referrerName;
+			}
+			
+			// Open URL
+			navigateToURL(new URLRequest(storeDomain+path+trackingSuffix));
+		}
 		
 		private function onStatus( event : StatusEvent ) : void
 		{
