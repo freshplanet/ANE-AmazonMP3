@@ -20,13 +20,9 @@
   <id>com.freshplanet.AirAmazonMP3</id>
   <versionNumber>1.0</versionNumber>
   <platforms>
-    <!-- <platform name="iPhone-ARM">
-            <applicationDeployment>
-                <nativeLibrary>libAirAmazonMP3.a</nativeLibrary>
-                <initializer>AirAmazonMP3Initializer</initializer> 
-                <finalizer>AirAmazonMP3Finalizer</finalizer>
-            </applicationDeployment>
-    </platform> -->
+    <platform name="iPhone-ARM">
+            <applicationDeployment/>
+    </platform>
  
    <platform name="Android-ARM"> 
         <applicationDeployment> 
