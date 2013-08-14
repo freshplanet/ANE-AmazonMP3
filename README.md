@@ -13,26 +13,26 @@ The ANE binary (AirAmazonMP3.ane) is located in the *bin* folder. You should add
 Usage
 -----
 
-	Only three interactions are supported at this time:
-	* show album detail
-	* show track detail
-	* search
+Only three interactions are supported at this time:
+* show album detail
+* show track detail
+* search
 
-	If the Amazon MP3 application is not installed, the ANE will fallback on the Amazon mobile web store.
-    
-    ```actionscript
-    	// Set the user's country (used to pick the right Amazon mobile web store)
-    	AirAmazonMP3.getInstance().country = "fr"; // France
+If the Amazon MP3 application is not installed, the ANE will fallback on the Amazon mobile web store.
 
-    	// Show an album detail and highlight a track (autoplay on Amazon MP3 app)
-    	AirAmazonMP3.getInstance().showAlbumDetail("SOME_ALBUM_ASIN", "SOME_TRACK_ASIN", "MY_REFERRER_NAME");
+```actionscript
+// Set the user's country (used to pick the right Amazon mobile web store)
+AirAmazonMP3.getInstance().country = "fr"; // France
 
-    	// Show a track detail (mobile web store only)
-    	AirAmazonMP3.getInstance().showTrackDetail("SOME_TRACK_ASIN", "MY_REFERRER_NAME");
+// Show an album detail and highlight a track (autoplay on Amazon MP3 app)
+AirAmazonMP3.getInstance().showAlbumDetail("SOME_ALBUM_ASIN", "SOME_TRACK_ASIN", "MY_REFERRER_NAME");
 
-    	// Perform a search
-    	AirAmazonMP3.getInstance().search("MY_SEARCH_STRING", "MY_REFERRER_NAME");
-    ```
+// Show a track detail (mobile web store only)
+AirAmazonMP3.getInstance().showTrackDetail("SOME_TRACK_ASIN", "MY_REFERRER_NAME");
+
+// Perform a search
+AirAmazonMP3.getInstance().search("MY_SEARCH_STRING", "MY_REFERRER_NAME");
+```
 
 
 Build script
