@@ -76,6 +76,9 @@ package com.freshplanet.ane.AirAmazonMP3
 		
 		public function showAlbumDetails(albumASIN:String, autoPlayTrackASIN:String = null, referrerName:String = null):void
 		{
+			albumASIN = sanitizeASIN(albumASIN);
+			autoPlayTrackASIN = sanitizeASIN(autoPlayTrackASIN);
+			
 			if (isSupported && albumASIN)
 			{
 				if (hasAmazonMP3App)
@@ -93,6 +96,8 @@ package com.freshplanet.ane.AirAmazonMP3
 		
 		public function showTrackDetails(trackASIN:String, referrerName:String = null):void
 		{
+			trackASIN = sanitizeASIN(trackASIN);
+			
 			if (isSupported && trackASIN)
 			{
 				// As of 2013-05-20 there is no intent to show a track detail on the Amazon MP3 application.
@@ -140,6 +145,15 @@ package com.freshplanet.ane.AirAmazonMP3
 		private static var _instance : AirAmazonMP3;
 		
 		private var _context : ExtensionContext;
+		
+		private function sanitizeASIN(asin:String):String
+		{
+			if (asin)
+			{
+				return asin.replace(/\W|_/g, "").slice(0, 10);
+			}
+			else return null;
+		}
 		
 		private function openWebStore(path:String, referrerName:String):void
 		{
