@@ -22,16 +22,16 @@ If the Amazon MP3 application is not installed, the ANE will fallback on the Ama
 
 ```actionscript
 // Set the user's country (used to pick the right Amazon mobile web store)
-AirAmazonMP3.getInstance().country = "fr"; // France
+AirAmazonMP3.instance.country = "fr"; // France
 
 // Show an album detail and highlight a track (autoplay on Amazon MP3 app)
-AirAmazonMP3.getInstance().showAlbumDetail("SOME_ALBUM_ASIN", "SOME_TRACK_ASIN", "MY_REFERRER_NAME");
+AirAmazonMP3.instance.showAlbumDetail("SOME_ALBUM_ASIN", "SOME_TRACK_ASIN", "MY_REFERRER_NAME");
 
 // Show a track detail (mobile web store only)
-AirAmazonMP3.getInstance().showTrackDetail("SOME_TRACK_ASIN", "MY_REFERRER_NAME");
+AirAmazonMP3.instance.showTrackDetail("SOME_TRACK_ASIN", "MY_REFERRER_NAME");
 
 // Perform a search
-AirAmazonMP3.getInstance().search("MY_SEARCH_STRING", "MY_REFERRER_NAME");
+AirAmazonMP3.instance.search("MY_SEARCH_STRING", "MY_REFERRER_NAME");
 ```
 
 
@@ -48,4 +48,4 @@ Should you need to edit the extension source code and/or recompile it, you will 
 Authors
 ------
 
-This ANE has been written by [Alexis Taugeron](http://alexistaugeron.com). It belongs to [FreshPlanet Inc.](http://freshplanet.com) and is distributed under the [Apache Licence, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+This ANE has been written by [Alexis Taugeron](http://alexistaugeron.com) and [Mateo Kozomara](mateo.kozomara@gmail.com). It belongs to [FreshPlanet Inc.](http://freshplanet.com) and is distributed under the [Apache Licence, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
