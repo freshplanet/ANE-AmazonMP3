@@ -3,6 +3,13 @@
 
     <!-- Config -->
     <property file="build.config"/>
+    
+    <!-- Load ant-contrib -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="ant-contrib-0.6.jar"/>
+        </classpath>
+    </taskdef>
 
     <!-- All -->
     <target name="all" depends="android,swc,package" description="Full build of extension"/>
@@ -25,6 +32,7 @@
         <!-- clean the build -->
         <exec executable="./gradlew" dir="../android">
             <env key="JAVA_HOME" path="${java.home}"/>
+            <env key="ANDROID_HOME" path="${android.sdk.home}"/>
             <arg line="clean"/>
         </exec>
 
@@ -38,6 +46,16 @@
         <!-- get the jar -->
         <copy file="${build.release}/classes.jar" tofile="temp/android/lib${name}.jar"/>
 
+        <!-- Copy over required resources -->
+        <if>
+            <equals arg1="${include.shared.resources}" arg2="true"/>
+            <then>
+                <copy todir="temp/android/${name}-res">
+                    <fileset dir="${build.intermediates}/res/merged/release"/>
+                </copy>
+            </then>
+        </if>
+
         <!-- Copy over the bundled libs -->
         <copy todir="temp/android">
             <fileset dir="${build.release}/libs" excludes="FlashRuntimeExtensions.jar, runtimeClasses.jar"/>
@@ -47,9 +65,6 @@
         <exec executable="/bin/bash">
             <arg value="extractJars.sh"/>
         </exec>
-
-        <!-- remove the build classes -->
-        <delete dir="../android/lib/build"/>
     </target>
 
     <!-- Actionscript -->
