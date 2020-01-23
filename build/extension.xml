@@ -24,6 +24,22 @@
             <finalizer>com.freshplanet.ane.AirAmazonMP3.AirAmazonMP3Extension</finalizer>
         </applicationDeployment>
     </platform>
+
+    <platform name="Android-ARM64">
+        <applicationDeployment>
+            <nativeLibrary>libAirAmazonMP3.jar</nativeLibrary>
+            <initializer>com.freshplanet.ane.AirAmazonMP3.AirAmazonMP3Extension</initializer>
+            <finalizer>com.freshplanet.ane.AirAmazonMP3.AirAmazonMP3Extension</finalizer>
+        </applicationDeployment>
+    </platform>
+
+    <platform name="Android-x86">
+        <applicationDeployment>
+            <nativeLibrary>libAirAmazonMP3.jar</nativeLibrary>
+            <initializer>com.freshplanet.ane.AirAmazonMP3.AirAmazonMP3Extension</initializer>
+            <finalizer>com.freshplanet.ane.AirAmazonMP3.AirAmazonMP3Extension</finalizer>
+        </applicationDeployment>
+    </platform>
     
     <platform name="default"> 
         <applicationDeployment/> 
